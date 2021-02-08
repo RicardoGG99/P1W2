@@ -21,8 +21,14 @@ public class Conexion {
 	public Connection getConnection() {
 		try {
 			if(conn == null) {
-			Class.forName(pr.getSQL("DBdriver"));
-			conn = DriverManager.getConnection(pr.getSQL("DBurl"), pr.getSQL("DBuser"), pr.getSQL("DBpassword") );
+				
+				String DBdriver = pr.getSQL("DBdriver");
+				String DBurl = pr.getSQL("DBurl");
+				String DBuser = pr.getSQL("DBuser");
+				String DBpassword = pr.getSQL("DBpassword");
+				
+			Class.forName(DBdriver);
+			conn = DriverManager.getConnection(DBurl, DBuser, DBpassword);
 			System.out.println("Conexion Exitosa");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
@@ -56,11 +62,6 @@ public class Conexion {
 		
 		return result;
 		
-	}
-	
-	public static void main(String[] args) {
-		PropertiesReader pr = new PropertiesReader();
-		System.out.println(pr.getSQL("DBdriver" ) + "\n" + pr.getSQL("DBurl") + "\n" + pr.getSQL("DBuser") + "\n" + pr.getSQL("DBpassword") + "\n" + pr.getSQL("registro"));
 	}
 	
 }
