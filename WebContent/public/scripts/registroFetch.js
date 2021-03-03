@@ -1,20 +1,14 @@
 var form = document.getElementById("form");
+var boton = document.getElementById("boton");
 
 form.addEventListener('submit', function(e){
     e.preventDefault();
     var fd = new FormData(form);
 
-    if(fd.get('cedula') == "" || fd.get('nombre') == "" || fd.get('apellido') == "" || fd.get('fdn') == "" || fd.get('password') == "" || fd.get('email') == ""){
-        alert("Los datos fueron rellenados de manera incorrecta");
-        return
-    }
-
     var datos = {
         method: "POST",
-        body: fd 
+        body: fd
     };
-
-    console.log('Registro')
 
     fetch('https://p1-w2.herokuapp.com/Register', datos)
     .then( res => res.json())

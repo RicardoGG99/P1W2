@@ -6,7 +6,6 @@ import java.sql.Connection;
 
 
 
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,7 +38,7 @@ public class Conexion {
 		return conn;
 	}
 	
-	//Register
+	//Registro
 	public boolean psRegistro(Connection connection, String[] obj) {
 		
 		boolean result = false;
@@ -49,8 +48,6 @@ public class Conexion {
 			
 			PreparedStatement ps = connection.prepareStatement(sentence);
 			ps = connection.prepareStatement(sentence);
-			
-			
 			ps.setString(1,  obj[0]);
 			ps.setString(2, obj[1]);
 			ps.setString(3, obj[2]);
@@ -69,42 +66,37 @@ public class Conexion {
 		
 	}
 	
-	
 	//Login
-	public boolean psLogin(Connection connection, String[] obj) {
-		boolean result = false;
-		
-		try {
-			String sentence = pr.getSQL("login");
-			PreparedStatement ps;
-			ResultSet rs;
+		public boolean psLogin(Connection connection, String[] obj) {
+			boolean result = false;
 			
-			ps = conn.prepareStatement(sentence);
-			ps.setString(1, obj[0]);
-			ps.setString(2, obj[1]);
+			try {
+				String sentence = pr.getSQL("login");
+				PreparedStatement ps;
+				ResultSet rs;
+				
+				ps = conn.prepareStatement(sentence);
+				ps.setString(1, obj[0]);
+				ps.setString(2, obj[1]);
+				
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					result = true;
+				}
+				
 			
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				result = true;
+			} catch (SQLException e) {
+				result = false;
 			}
 			
-		
-		} catch (SQLException e) {
-			result = false;
+			
+			
+			return result;
 		}
 		
+		//Delete
 		
-		
-		return result;
-	}
-	
-	//Delete
-	
-	//Update
-	
-	
-	
-	
+		//Update
 	
 }

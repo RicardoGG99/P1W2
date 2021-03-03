@@ -8,6 +8,7 @@
     <title>Registro</title>
 </head>
 <body>
+
     <div class="form">
         <form id="form"> 
             <h1> Registra un nuevo usuario </h1> <br> 
@@ -16,26 +17,33 @@
             <input type="number" id="cedula" name="cedula" placeholder="ej: 11.222.333" min="0"  required> <br> <br>
             
             <label for="nombre"> Nombre: </label>
-            <input type="text"  id="nombre" name="nombre" placeholder="ej: Ricardo" maxlength="50" required> <br> <br>
+            <input type="text" id="nombre" name="nombre" placeholder="ej: Ricardo" maxlength="50" required> <br> <br>
             
             <label for="apellido"> Apellido: </label>
             <input type="text" id="apellido" name="apellido" placeholder="ej: Graziano" maxlength="50" required> <br> <br>
             
             <label for="fdn"> Fecha de Nacimiento: </label>
-            <input type="date" id="fdn" name="fdn" placeholder="ej: 19/06/1999" required max="2005-01-01" min="1900-01-01"> <br> <br>
+            <input type="date" id="fdn" name="fdn" placeholder="ej: 19/06/1999" required> <br> <br>
 
             <label for="password"> Contraseña: </label>
-            <input type="password" id="password" name="password" placeholder="ej: micontraseña123" maxlength="50" minlength="8" required> <br> <br>
+            <input type="password" id="password" name="password" placeholder="ej: micontraseña123" maxlength="50" required> <br> <br>
             
             <label for="email"> Email: </label>
             <input type="email" id="email" name="email" placeholder="ej: marysue@gmail.com" maxlength="50" required> <br> <br>
             
             <input type="submit" name="boton" id="boton" value="Registrate"> <br> <br>
-
-            <p><a href="./login.html"> Inicia Sesión si ya tienes una cuenta </a></p> <br> <br>
+            
+            <h3> <a href="login.html"> Inicia sesión aquí </a> </h3>
         </form>
+        
+
     </div>
+
+    
+
+    
+    
 </body>
 <script src="./public/scripts/registroFetch.js"> </script>
- 
+
 </html>

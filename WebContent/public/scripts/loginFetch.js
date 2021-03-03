@@ -9,7 +9,6 @@ form.addEventListener('submit', function(e){
         body: fd 
     };
 
-    console.log('Login')
 
     fetch('https://p1-w2.herokuapp.com/Login', datos)
     .then( res => res.json())

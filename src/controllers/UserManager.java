@@ -1,7 +1,6 @@
 package controllers;
 
 import java.sql.Connection;
-
 import helpers.Conexion;
 import helpers.PasswordHashing;
 
@@ -60,8 +59,5 @@ public class UserManager {
     	
     	return message;
     }
-    
-    
-    
   
     }
