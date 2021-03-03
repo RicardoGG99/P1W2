@@ -14,6 +14,8 @@ form.addEventListener('submit', function(e){
         body: fd 
     };
 
+    console.log('Registro')
+
     fetch('https://p1-w2.herokuapp.com/Register', datos)
     .then( res => res.json())
     .then( data => {

@@ -9,9 +9,9 @@ form.addEventListener('submit', function(e){
         body: fd 
     };
 
-    console.log('https://p1-w2.herokuapp.com/Login')
+    console.log('Login')
 
-    fetch('Login', datos)
+    fetch('https://p1-w2.herokuapp.com/Login', datos)
     .then( res => res.json())
     .then( data => {
         if(data.status == 200){
