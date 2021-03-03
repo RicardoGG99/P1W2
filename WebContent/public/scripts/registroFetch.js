@@ -1,5 +1,4 @@
 var form = document.getElementById("form");
-var boton = document.getElementById("boton");
 
 form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -12,7 +11,7 @@ form.addEventListener('submit', function(e){
 
     var datos = {
         method: "POST",
-        body: fd
+        body: fd 
     };
 
     fetch('https://p1-w2.herokuapp.com/Register', datos)
