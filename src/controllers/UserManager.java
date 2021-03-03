@@ -61,10 +61,6 @@ public class UserManager {
     	return message;
     }
     
-    public static void main(String[] args) {
-		UserManager um = new UserManager();
-		System.out.println(um.login("27637837", "12344"));
-	}
     
     
   
