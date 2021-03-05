@@ -50,7 +50,6 @@ public class UserManager {
 			if(result == true) {
 				
 				message = "{\"message\": \"Login Exitoso\", "
-						 + "\"username\": \"" + cedula + "\", "
 					 	 + "\"status\": 200 }";
 			}else {
 				 

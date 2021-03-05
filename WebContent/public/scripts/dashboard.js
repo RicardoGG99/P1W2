@@ -1,3 +1,7 @@
+var datos = {
+    method: "POST"
+};
+
 fetch('https://p1-w2.herokuapp.com/Sesion', datos)
     .then( res => res.json())
     .then( data => {
