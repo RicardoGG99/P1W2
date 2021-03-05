@@ -50,14 +50,9 @@ public class UserManager {
 			
 			if(result == true) {
 				HttpSession session = request.getSession();
-				String[] obj2 = UserManager.llamarObject(cedula, password);
 				
-				session.setAttribute("cedula",   obj2[0]);
-				session.setAttribute("nombre",   obj2[1]);
-				session.setAttribute("apellido", obj2[2]);
-				session.setAttribute("fdn",      obj2[3]);
-				session.setAttribute("password", obj2[4]);
-				session.setAttribute("email",    obj2[5]);
+				session.setAttribute("cedula",   cedula);
+				session.setAttribute("password",   newPassword);
 				
 				message = "{\"message\": \"Login Exitoso\", "
 					 	 + "\"status\": 200 }";
@@ -78,38 +73,9 @@ public class UserManager {
     	return message;
     }
     
-    public static String[] llamarObject(String cedula, String password) {
-		
-    	String newPassword = ph.hashPassword(password);
-    	String[] obj = {cedula, newPassword};
-    	
-    	String[] obj2 = conn.devolverObjeto(obj);
-    	
-    	
-    	return obj2;
-    	
-    }
     
-    public static String sesionMensaje(HttpServletRequest request) {
-		
-    	HttpSession session = request.getSession();
-		
-		String cedula = (String) session.getAttribute("cedula");
-		String nombre = (String) session.getAttribute("nombre");
-		String apellido = (String) session.getAttribute("apellido");
-		String fdn = (String) session.getAttribute("fdn");
-		String password = (String) session.getAttribute("password");
-		String email = (String) session.getAttribute("email");
-		
-		String res = "{\"cedula\": \""   + cedula + "\", "
-				    + "\"nombre\": \""   + nombre + "\", "
-				    + "\"apellido\": \"" + apellido + "\", "
-				    + "\"fdn\": \""      + fdn + "\", "
-				    + "\"password\": \"" + password + "\", "
-			 	    + "\"email\": \""    + email + "\" }";
-    	
-    	return res;
-    }
+    
+    
     
     
     

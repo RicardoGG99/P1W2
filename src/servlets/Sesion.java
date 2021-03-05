@@ -27,9 +27,8 @@ public class Sesion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
-		String res = UserManager.sesionMensaje(request);
 		
-		out.println(res);
+		out.print("Hola Sesion");
 		
 		
 	}
