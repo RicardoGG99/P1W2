@@ -2,9 +2,8 @@ package controllers;
 
 import java.sql.Connection;
 
-import javax.servlet.http.Cookie;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import helpers.Conexion;
@@ -51,7 +50,16 @@ public class UserManager {
 			boolean result = conn.psLogin(obj);
 			
 			if(result == true) {
-				HttpSession session = request.getSession();
+				
+				String[] obj2 = Conexion.psDatos(cedula, ph.hashPassword(password));
+		    	
+		    	HttpSession session = request.getSession();
+		    	session.setAttribute("cedula",   obj2[0]);
+		    	session.setAttribute("nombre",   obj2[1]);
+		    	session.setAttribute("apellido", obj2[2]);
+		    	session.setAttribute("fdn",      obj2[3]);
+		    	session.setAttribute("password", obj2[4]);
+		    	session.setAttribute("email",    obj2[5]);
 				
 				session.setAttribute("cedula",   cedula);
 				session.setAttribute("password",   newPassword);
@@ -75,49 +83,19 @@ public class UserManager {
     	return message;
     }
     
-    //Cookies (Datos de la Sesion)
-    
-    public static void Cookies(HttpServletResponse response, String cedula, String password) {
-    	
-    	
-    	String[] obj = Conexion.psCookies(cedula, ph.hashPassword(password));
-    	
-    	
-    	Cookie cookie =  new Cookie("cedula", obj[0]);
-    	response.addCookie(cookie);
-    	
-    	Cookie cookie1 = new Cookie("nombre", obj[1]);
-    	response.addCookie(cookie1);
-    	
-    	Cookie cookie2 = new Cookie("apellido", obj[2]);
-    	response.addCookie(cookie2);
-    	
-    	Cookie cookie3 = new Cookie("fdn", obj[3]);
-    	response.addCookie(cookie3);
-    	
-    	Cookie cookie4 = new Cookie("password", obj[4]);
-    	response.addCookie(cookie4);
-    	
-    	Cookie cookie5 = new Cookie("email", obj[5]);
-    	response.addCookie(cookie5);
-    	 
-    	System.out.println(cookie + "\n" + cookie1 + "\n" + cookie2 + "\n" + cookie3 + "\n" + cookie4 + "\n" + cookie5);
-    }
+    //Datos de la Sesion
     
     
-    public static String obtenerCookies(HttpServletRequest request) {
+    public static String showCredentials(HttpServletRequest request) {
     	
-    	Cookie[] cookies = request.getCookies();
-    	
-    	String message = "{\"cedula\": \""   + cookies[0] + "\", "
-    			        + "\"nombre\": \""   + cookies[1] + "\", "
-    			        + "\"apellido\": \"" + cookies[2] + "\", " 
-    			        + "\"fdn\": \""      + cookies[3] + "\", " 
-    			        + "\"password\": \"" + cookies[4] + "\", " 
-    					+ "\"email\": \""    + cookies[5] + "\"}";
-    	
+    	HttpSession session = request.getSession();
+    	String message = "{\"cedula\": \""    + session.getAttribute("cedula") + "\","
+    			        + "\"nombre\": \""    + session.getAttribute("nombre") + "\"," 
+    			        + "\"apellido\": \""  + session.getAttribute("apellido") + "\","
+    			        + "\"fdn\": \""       + session.getAttribute("fdn") + "\","
+    			        + "\"password\": \""  + session.getAttribute("password") + "\","
+    			        + "\"email\": \""     + session.getAttribute("email") + "\"\"}";
     	return message;
-    	
     }
     
     

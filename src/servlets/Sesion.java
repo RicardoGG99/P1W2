@@ -28,7 +28,7 @@ public class Sesion extends HttpServlet {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		
-		String res = UserManager.obtenerCookies(request);
+		String res = UserManager.showCredentials(request);
 		out.println(res);
 	}
 

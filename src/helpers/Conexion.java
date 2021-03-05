@@ -96,8 +96,8 @@ public class Conexion {
 			return result;
 		}
 		
-	//Cookies
-		public static String[] psCookies(String cedula, String password) {
+	//Obtener todos los datos de la fila
+		public static String[] psDatos(String cedula, String password) {
 			
 			String[] obj = {"", "", "", "", "", ""};
 			
@@ -113,8 +113,8 @@ public class Conexion {
 				rs = ps.executeQuery();
 				
 				while(rs.next()) {
-					for(int x = 0; x < 5; x++) {
-						obj[0] = rs.getString(x+1);
+					for(int x = 0; x <= 5; x++) {
+						obj[x] = rs.getString(x+1);
 					}
 					
 				}
@@ -129,6 +129,8 @@ public class Conexion {
 			
 			return obj;
 		}
+		
+		
 		
 		
 		
