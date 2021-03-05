@@ -14,7 +14,7 @@ form.addEventListener('submit', function(e){
     fetch('https://p1-w2.herokuapp.com/Login', datos)
     .then( res => res.json())
     .then( data => {
-        if(data.status == 200 && data.cedula == fd.get('cedula') && data.password == fd.get('password')){
+        if(data.status == 200){
             window.open('https://p1-w2.herokuapp.com/public/views/logged.html', "_self");
             alert(data.message);
         }else{
