@@ -10,8 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import controllers.UserManager;
 
 
@@ -35,17 +33,7 @@ public class Login extends HttpServlet {
 		String cedula = request.getParameter("cedula");
 		String password = request.getParameter("password");
 		
-		HttpSession session = request.getSession();
-		String[] obj = um.llamarObject(cedula, password);
-		
-		session.setAttribute("cedula",   obj[0]);
-		session.setAttribute("nombre",   obj[1]);
-		session.setAttribute("apellido", obj[2]);
-		session.setAttribute("fdn",      obj[3]);
-		session.setAttribute("password", obj[4]);
-		session.setAttribute("email",    obj[5]);
-		
-		String res = um.login(cedula, password, session);
+		String res = um.login(cedula, password, request);
 		out.println(res);
 		
 	}
