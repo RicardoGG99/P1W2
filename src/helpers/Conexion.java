@@ -6,6 +6,7 @@ import java.sql.Connection;
 
 
 
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 public class Conexion {
 	
 	
-	PropertiesReader pr = new PropertiesReader();
+	static PropertiesReader pr = new PropertiesReader();
 	private static Connection conn = null;
 	
 	
@@ -93,6 +94,40 @@ public class Conexion {
 			
 			
 			return result;
+		}
+		
+	//Cookies
+		public static String[] psCookies(String cedula, String password) {
+			
+			String[] obj = {"", "", "", "", "", ""};
+			
+			try {
+				String sentence = pr.getSQL("login");
+				PreparedStatement ps;
+				ResultSet rs;
+				
+				ps = conn.prepareStatement(sentence);
+				ps.setString(1, cedula);
+				ps.setString(2, password);
+				
+				rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					for(int x = 0; x < 5; x++) {
+						obj[0] = rs.getString(x+1);
+					}
+					
+				}
+				
+			
+			} catch (SQLException e) {
+				System.out.println(e);
+			}
+			
+			
+			
+			
+			return obj;
 		}
 		
 		
