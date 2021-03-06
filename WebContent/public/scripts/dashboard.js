@@ -14,6 +14,7 @@ form.addEventListener('submit', function(e){
     fetch('https://p1-w2.herokuapp.com/Sesion', datos)
     .then( res => res.json())
     .then( data => {
+        console.log(data.cedula + "" + data.nombre + "" + data.apellido + "" + data.fdn + "" + data.password + "" + data.email)
         document.getElementById("h1").innerHTML = `Bienvenido ${data.nombre}`;
         document.getElementById("cedula").innerHTML = data.cedula;
         document.getElementById("nombre").innerHTML = data.nombre;
@@ -21,6 +22,7 @@ form.addEventListener('submit', function(e){
         document.getElementById("fdn").innerHTML = data.fdn;
         document.getElementById("password").innerHTML = data.password;
         document.getElementById("email").innerHTML = data.email;
+        window.self
     })
     .catch(error => console.error());
 
