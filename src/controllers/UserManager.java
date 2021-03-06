@@ -47,7 +47,7 @@ public class UserManager {
 		String message = "";
     	
 		try {
-			boolean result = conn.psLogin(obj);
+			boolean result = conn.psLogin(obj, connection);
 			
 			if(result == true) {
 				
@@ -195,12 +195,6 @@ public class UserManager {
     
     //delete
     
-   public static void main(String[] args) {
-	UserManager um = new UserManager();
-	System.out.println(um.register("27637837", "Ricardo", "Graziano", "19-06-1999", "12345678", "ric@ric"));
-	
-	
-   }
     
     
   

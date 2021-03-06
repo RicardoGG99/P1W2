@@ -68,7 +68,7 @@ public class Conexion {
 	}
 	
 		//Login
-		public boolean psLogin(String[] obj) {
+		public boolean psLogin(String[] obj, Connection connection) {
 			boolean result = false;
 			
 			try {
@@ -76,7 +76,7 @@ public class Conexion {
 				PreparedStatement ps;
 				ResultSet rs;
 				
-				ps = conn.prepareStatement(sentence);
+				ps = connection.prepareStatement(sentence);
 				ps.setString(1, obj[0]);
 				ps.setString(2, obj[1]);
 				
