@@ -28,9 +28,9 @@ var datos = {
             document.getElementById("fdn").value = data.fdn;
             document.getElementById("password").value = data.password;
             document.getElementById("email").value = data.email;
-            document.getElementById("email").value = data.segundoNombre;
-            document.getElementById("email").value = data.segundoApellido;
-            document.getElementById("email").value = data.telf;
+            document.getElementById("segundoNombre").value = data.segundoNombre;
+            document.getElementById("segundoApellido").value = data.segundoApellido;
+            document.getElementById("telf").value = data.telf;
             help++;
             console.log(help)
             window.self();
