@@ -21,6 +21,7 @@ public class UserManager {
 		String[] obj = {cedula, nombre, apellido, fdn, newPassword, email};
 		String message = "";
 		
+		
 		try {
 			boolean result = conn.psRegistro(connection, obj);
 			
