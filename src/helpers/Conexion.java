@@ -99,7 +99,7 @@ public class Conexion {
 	//Obtener todos los datos de la fila
 		public static String[] psDatos(String cedula, String password) {
 			
-			String[] obj = {"", "", "", "", "", ""};
+			String[] obj = {};
 			
 			try {
 				String sentence = pr.getSQL("login");
@@ -137,5 +137,40 @@ public class Conexion {
 		//Delete
 		
 		//Update
+		
+		public static boolean psUpdate(String[] obj, String cedula, Connection connection) {
+			boolean result = false;
+			String sentence = pr.getSQL("update");
+			
+			try {
+				PreparedStatement pst = null;
+				pst = connection.prepareStatement(sentence);
+				pst.setString(1,  obj[0]);
+				pst.setString(2, obj[1]);
+				pst.setString(3, obj[2]);
+				pst.setString(4,  obj[3]);
+				pst.setString(5, obj[4]);
+				pst.setString(6, obj[5]);
+				pst.setString(7, obj[6]);
+				pst.setString(8, obj[7]);
+				pst.setString(9, obj[8]);
+				pst.setString(10, cedula);
+				System.out.println(pst);
+				pst.execute();
+				
+				pst.close();
+				result = true;
+			} catch (SQLException e) {
+				result = false;
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			
+			return result;
+		}
+		
 	
 }

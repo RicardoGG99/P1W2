@@ -11,7 +11,7 @@ import helpers.PasswordHashing;
 
 public class UserManager {
     static Conexion conn = new Conexion();
-    Connection connection = conn.getConnection();
+    static Connection connection = conn.getConnection();
     static PasswordHashing ph = new PasswordHashing();
     
     //Register
@@ -70,6 +70,15 @@ public class UserManager {
 		    		Cookie cookie5 = new Cookie("email", obj2[5]);
 		    		response.addCookie(cookie5);
 		    		
+		    		Cookie cookie6 = new Cookie("segundoNombre", obj2[6]);
+		    		response.addCookie(cookie6);
+		    		
+		    		Cookie cookie7 = new Cookie("segundoApellido", obj2[7]);
+		    		response.addCookie(cookie7);
+		    		
+		    		Cookie cookie8 = new Cookie("telf", obj2[8]);
+		    		response.addCookie(cookie8);
+		    		
 				
 				message = "{\"message\": \"Login Exitoso\", "
 					 	 + "\"status\": 200 }";
@@ -79,6 +88,8 @@ public class UserManager {
 			}
 			
 		} catch (Exception e) {
+			message = "{\"message\": \"El Login fue fallido\", "
+					 + "\"status\": 503 }";
 			e.printStackTrace();
 		}
     	
@@ -90,7 +101,6 @@ public class UserManager {
     
     //Datos de la Sesion
     
-    
     public static String showCredentials(HttpServletRequest request) {
     	
     	Cookie cookies[] = request.getCookies();
@@ -100,6 +110,9 @@ public class UserManager {
     	String fdn = "";
     	String password = "";
     	String email = "";
+    	String segundoNombre = "";
+    	String segundoApellido = "";
+    	String telf = "";
     	
     	for(Cookie c : cookies) {
     		if(c.getName().equals("cedula")) {
@@ -125,14 +138,61 @@ public class UserManager {
     		if(c.getName().equals("email")) {
     			email = c.getValue();
     		}
+    		
+    		if(c.getName().equals("segundoNombre")) {
+    			segundoNombre = c.getValue();
+    		}
+    		
+    		if(c.getName().equals("segundoApellido")) {
+    			segundoApellido = c.getValue();
+    		}
+    		
+    		if(c.getName().equals("telf")) {
+    			telf = c.getValue();
+    		}
     	}
     	
     	
     	System.out.println(cedula + "\n" + nombre + "\n" + apellido + "\n" + fdn + "\n" + password + "\n" + email);
-    	String message = "{\"cedula\":   \""  +  cedula +  "\", \"nombre\": \"" + nombre + "\", \"apellido\": \"" + apellido + "\", \"fdn\": \"" + fdn + "\", \"password\": \"" + password + "\", \"email\": \"" + email + "\"}";
+    	String message = "{\"cedula\":   \""  +  cedula +  "\", \"nombre\": \"" + nombre + "\", \"apellido\": \"" + apellido + "\", \"fdn\": \"" + fdn + "\", \"password\": \"" + password + "\", \"email\": \"" + email + "\", \"segundoNombre\": \"" + segundoNombre + "\", \"segundoApellido\": \"" + segundoApellido + "\", \"telf\": \"" + telf + "\", \"status\": \"200\"}";
 
     	return message;
     }
+    
+    //update
+    
+    public static String update(HttpServletRequest request, String[] obj) {
+    	Cookie cookies[] = request.getCookies();
+    	String cedula = "";
+    	String message = "";
+    	boolean result = false;
+    	
+    	for(Cookie c: cookies) {
+    		if(c.getName().equals("cedula")) {
+    			cedula = c.getValue();
+    		}
+    	}
+    	
+    	try {
+			result = Conexion.psUpdate(obj, cedula, connection);
+			if(result == false) {
+				message = "{\"message\": \"Update Exitoso\", "
+					 	 + "\"status\": 200 }";
+
+			}else {
+				message = "{\"message\": \"Update Fallido\", "
+					 	 + "\"status\": 502 }";
+			}
+			
+		} catch (Exception e) {
+			
+		}
+    	
+    	return message;
+    }
+
+    
+    //delete
     
     
     

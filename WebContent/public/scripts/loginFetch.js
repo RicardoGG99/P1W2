@@ -23,5 +23,4 @@ form.addEventListener('submit', function(e){
         }
     })
     .catch(error => console.error());
-
-});
+    });
