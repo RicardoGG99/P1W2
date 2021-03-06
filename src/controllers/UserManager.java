@@ -71,14 +71,14 @@ public class UserManager {
 		    		Cookie cookie5 = new Cookie("email", obj2[5]);
 		    		response.addCookie(cookie5);
 		    		
-		    		Cookie cookie6 = new Cookie("segundoNombre", obj2[6]);
-		    		response.addCookie(cookie6);
-		    		
-		    		Cookie cookie7 = new Cookie("segundoApellido", obj2[7]);
-		    		response.addCookie(cookie7);
-		    		
-		    		Cookie cookie8 = new Cookie("telf", obj2[8]);
-		    		response.addCookie(cookie8);
+//		    		Cookie cookie6 = new Cookie("segundoNombre", obj2[6]);
+//		    		response.addCookie(cookie6);
+//		    		
+//		    		Cookie cookie7 = new Cookie("segundoApellido", obj2[7]);
+//		    		response.addCookie(cookie7);
+//		    		
+//		    		Cookie cookie8 = new Cookie("telf", obj2[8]);
+//		    		response.addCookie(cookie8);
 		    		
 				
 				message = "{\"message\": \"Login Exitoso\", "
