@@ -21,7 +21,6 @@ form.addEventListener('submit', function(e){
         document.getElementById("fdn").innerHTML = data.fdn;
         document.getElementById("password").innerHTML = data.password;
         document.getElementById("email").innerHTML = data.email;
-        window.open("_self");
     })
     .catch(error => console.error());
 
