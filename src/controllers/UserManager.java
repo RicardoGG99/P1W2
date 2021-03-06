@@ -2,10 +2,9 @@ package controllers;
 
 import java.sql.Connection;
 
-
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import javax.servlet.http.HttpServletResponse;
 import helpers.Conexion;
 import helpers.PasswordHashing;
 
@@ -41,7 +40,7 @@ public class UserManager {
 	}
     
     //Login
-    public String login(String cedula, String password, HttpServletRequest request) {
+    public String login(String cedula, String password, HttpServletResponse response) {
     	String newPassword = ph.hashPassword(password);
     	String[] obj = {cedula, newPassword};
 		String message = "";
@@ -53,22 +52,28 @@ public class UserManager {
 				
 				String[] obj2 = Conexion.psDatos(cedula, ph.hashPassword(password));
 		    	
-		    	HttpSession session = request.getSession();
-		    	session.setAttribute("cedula",   obj2[0]);
-		    	session.setAttribute("nombre",   obj2[1]);
-		    	session.setAttribute("apellido", obj2[2]);
-		    	session.setAttribute("fdn",      obj2[3]);
-		    	session.setAttribute("password", obj2[4]);
-		    	session.setAttribute("email",    obj2[5]);
-				
-				session.setAttribute("cedula",   cedula);
-				session.setAttribute("password",   newPassword);
+		    		Cookie cookie = new Cookie("cedula", obj2[0]);
+		    		response.addCookie(cookie);
+		    		
+		    		Cookie cookie1 = new Cookie("nombre", obj2[1]);
+		    		response.addCookie(cookie1);
+		    		
+		    		Cookie cookie2 = new Cookie("apellido", obj2[2]);
+		    		response.addCookie(cookie2);
+		    		
+		    		Cookie cookie3 = new Cookie("fdn", obj2[3]);
+		    		response.addCookie(cookie3);
+		    		
+		    		Cookie cookie4 = new Cookie("password", obj2[4]);
+		    		response.addCookie(cookie4);
+		    		
+		    		Cookie cookie5 = new Cookie("email", obj2[5]);
+		    		response.addCookie(cookie5);
+		    		
 				
 				message = "{\"message\": \"Login Exitoso\", "
 					 	 + "\"status\": 200 }";
 			}else {
-				HttpSession session = request.getSession();
-				session.invalidate();
 				message = "{\"message\": \"El Login fue fallido\", "
 						 + "\"status\": 503 }";
 			}
@@ -88,13 +93,50 @@ public class UserManager {
     
     public static String showCredentials(HttpServletRequest request) {
     	
-    	HttpSession session = request.getSession();
-    	String message = "{\"cedula\": \""    + session.getAttribute("cedula") + "\","
-    			        + "\"nombre\": \""    + session.getAttribute("nombre") + "\"," 
-    			        + "\"apellido\": \""  + session.getAttribute("apellido") + "\","
-    			        + "\"fdn\": \""       + session.getAttribute("fdn") + "\","
-    			        + "\"password\": \""  + session.getAttribute("password") + "\","
-    			        + "\"email\": \""     + session.getAttribute("email") + "\"\"}";
+    	Cookie cookies[] = request.getCookies();
+    	String cedula = "";
+    	String nombre = "";
+    	String apellido = "";
+    	String fdn = "";
+    	String password = "";
+    	String email = "";
+    	
+    	for(Cookie c : cookies) {
+    		if(c.getName().equals("cedula")) {
+    			cedula = c.getValue();
+    		}
+    		
+    		if(c.getName().equals("nombre")) {
+    			nombre = c.getValue();
+    		}
+    		
+    		if(c.getName().equals("apellido")) {
+    			apellido = c.getValue();
+    		}
+    		
+    		if(c.getName().equals("fdn")) {
+    			fdn = c.getValue();
+    		}
+    		
+    		if(c.getName().equals("password")) {
+    			password = c.getValue();
+    		}
+    		
+    		if(c.getName().equals("email")) {
+    			email = c.getValue();
+    		}
+    	}
+    	
+    	
+    	
+    	String message = "{\"cedula\":   \""  + cedula + "\","
+    			        + "\"nombre\":   \""  + nombre + "\"," 
+    			        + "\"apellido\": \""  + apellido + "\","
+    			        + "\"fdn\":      \""  + fdn + "\","
+    			        + "\"password\": \""  + password + "\","
+    			        + "\"email\":    \""  + email + "\"\"}";
+    	
+    	
     	return message;
     }
     

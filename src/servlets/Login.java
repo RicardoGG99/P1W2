@@ -33,7 +33,7 @@ public class Login extends HttpServlet {
 		String cedula = request.getParameter("cedula");
 		String password = request.getParameter("password");
 		
-		String res = um.login(cedula, password, request);
+		String res = um.login(cedula, password, response);
 		out.println(res);
 		
 	}
