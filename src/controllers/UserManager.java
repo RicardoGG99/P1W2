@@ -129,12 +129,7 @@ public class UserManager {
     	
     	
     	
-    	String message = "{\"cedula\":   \""  + cedula + "\","
-    			        + "\"nombre\":   \""  + nombre + "\"," 
-    			        + "\"apellido\": \""  + apellido + "\","
-    			        + "\"fdn\":      \""  + fdn + "\","
-    			        + "\"password\": \""  + password + "\","
-    			        + "\"email\":    \""  + email + "\"\"}";
+    	String message = "{\"cedula\":   \""  + cedula + "\"}";
     	
     	
     	return message;

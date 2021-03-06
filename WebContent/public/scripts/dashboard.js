@@ -9,7 +9,7 @@ form.addEventListener('submit', function(e){
         body: fd 
     };
 
-    
+    console.log(data.cedula)
 
     fetch('https://p1-w2.herokuapp.com/Sesion', datos)
     .then( res => res.json())
