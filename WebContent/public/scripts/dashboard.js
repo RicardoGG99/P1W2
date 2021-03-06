@@ -9,11 +9,12 @@ form.addEventListener('submit', function(e){
         body: fd 
     };
 
-    console.log(data.cedula)
+    
 
     fetch('https://p1-w2.herokuapp.com/Sesion', datos)
     .then( res => res.json())
     .then( data => {
+        console.log(data.cedula)
         document.getElementById("h1").value = `Bienvenido ${data.nombre}`;
         document.getElementById("cedula").value = data.cedula;
         document.getElementById("nombre").value = data.nombre;
