@@ -111,12 +111,11 @@ public class Conexion {
 				ps.setString(2, password);
 				
 				rs = ps.executeQuery();
+				int x = 0;
 				
 				while(rs.next()) {
-					for(int x = 0; x <= 5; x++) {
 						obj[x] = rs.getString(x+1);
-					}
-					
+						x++;
 				}
 				
 			
