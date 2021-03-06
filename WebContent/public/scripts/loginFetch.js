@@ -1,5 +1,4 @@
 var form = document.getElementById("form");
-var boton = document.getElementById("boton");
 
 form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -7,20 +6,21 @@ form.addEventListener('submit', function(e){
 
     var datos = {
         method: "POST",
-        body: fd
+        body: fd 
     };
 
-    fetch('https://p1-w2.herokuapp.com/Register', datos)
+    
+
+    fetch('https://p1-w2.herokuapp.com/Login', datos)
     .then( res => res.json())
     .then( data => {
         if(data.status == 200){
-            window.open('https://p1-w2.herokuapp.com/public/views/new.html', "_self");
+            window.open('https://p1-w2.herokuapp.com/public/views/logged.html', "_self");
             alert(data.message);
         }else{
-            window.open('https://p1-w2.herokuapp.com/public/views/exist.html', "_self");
+            window.open('https://p1-w2.herokuapp.com/public/views/notlog.html', "_self");
             alert(data.message);
         }
     })
     .catch(error => console.error());
-
-});
+    });
