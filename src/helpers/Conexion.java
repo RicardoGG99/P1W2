@@ -99,7 +99,7 @@ public class Conexion {
 	//Obtener todos los datos de la fila
 		public static String[] psDatos(String cedula, String password) {
 			
-			String[] obj = {};
+			String[] obj = {"", "", "", "", "", "", "", "", ""};
 			
 			try {
 				String sentence = pr.getSQL("login");
@@ -111,11 +111,13 @@ public class Conexion {
 				ps.setString(2, password);
 				
 				rs = ps.executeQuery();
-				int x = 0;
+				
 				
 				while(rs.next()) {
+						for(int x = 0; x < 9; x++) {
 						obj[x] = rs.getString(x+1);
-						x++;
+						System.out.println(obj[x]);
+						}
 				}
 				
 			
