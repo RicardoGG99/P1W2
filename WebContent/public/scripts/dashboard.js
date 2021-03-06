@@ -1,16 +1,9 @@
 var form = document.getElementById("form");
-
-form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var fd = new FormData(form);
-
-    var datos = {
+var fd = new FormData(form);
+var datos = {
         method: "POST",
         body: fd 
     };
-
-    var daa = "{\"message\": \"Registro Exitoso\", \"status\": 200 }"
-    
 
     fetch('https://p1-w2.herokuapp.com/Sesion', datos)
     .then( res => res.json())
@@ -32,4 +25,3 @@ form.addEventListener('submit', function(e){
     })
     .catch(error => console.error());
 
-});
