@@ -9,6 +9,7 @@ form.addEventListener('submit', function(e){
         body: fd 
     };
 
+    var daa = "{\"message\": \"Registro Exitoso\", \"status\": 200 }"
     
 
     fetch('https://p1-w2.herokuapp.com/Sesion', datos)
@@ -20,14 +21,14 @@ form.addEventListener('submit', function(e){
         console.log(data.fdn);
         console.log(data.password);
         console.log(data.email);
-        document.getElementById("h1").innerHTML = `Bienvenido ${data.nombre}`;
-        document.getElementById("cedula").innerHTML = data.cedula;
-        document.getElementById("nombre").innerHTML = data.nombre;
-        document.getElementById("apellido").innerHTML = data.apellido;
-        document.getElementById("fdn").innerHTML = data.fdn;
-        document.getElementById("password").innerHTML = data.password;
-        document.getElementById("email").innerHTML = data.email;
-        window.open("_self")
+        document.getElementById("h1").value = `Bienvenido ${data.nombre}`;
+        document.getElementById("cedula").value = data.cedula;
+        document.getElementById("nombre").value = data.nombre;
+        document.getElementById("apellido").value = data.apellido;
+        document.getElementById("fdn").value = data.fdn;
+        document.getElementById("password").value = data.password;
+        document.getElementById("email").value = data.email;
+        window.self();
     })
     .catch(error => console.error());
 

@@ -129,7 +129,9 @@ public class UserManager {
     	
     	
     	System.out.println(cedula + "\n" + nombre + "\n" + apellido + "\n" + fdn + "\n" + password + "\n" + email);
-    	String message = "{\"cedula\":   \""    + cedula   + "\", \" nombre\":   \""    + nombre   + "\", \" apellido\": \""    + apellido + "\", \" fdn\":      \""    + fdn      + "\", \" password\": \""    + password + "\", \" email\":    \""    + email    + "\"}";
+    	String message = "{\"cedula\":   \""  +  cedula +  "\", \"nombre\": \"" + nombre + "\"}";
+    	String a = "{\"message\": \"Registro Exitoso\", \"status\": 200 }";
+        
     	
     	
     	return message;
