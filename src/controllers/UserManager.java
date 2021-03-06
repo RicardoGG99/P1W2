@@ -194,6 +194,12 @@ public class UserManager {
     
     //delete
     
+   public static void main(String[] args) {
+	UserManager um = new UserManager();
+	System.out.println(um.register("27637837", "Ricardo", "Graziano", "19-06-1999", "12345678", "ric@ric"));
+	
+	
+   }
     
     
   
