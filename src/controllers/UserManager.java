@@ -128,13 +128,8 @@ public class UserManager {
     	}
     	
     	
-    	
-    	String message = "{\"nombre\":   \""    + nombre   + "\","
-    			       + "\" cedula\":   \""    + cedula   + "\","
-    			       + "\" apellido\": \""    + apellido + "\","
-    			       + "\" fdn\":      \""    + fdn      + "\","
-    			       + "\" password\": \""    + password + "\","
-    			       + "\" email\":    \""    + email    + "\"}";
+    	System.out.println(cedula + "\n" + nombre + "\n" + apellido + "\n" + fdn + "\n" + password + "\n" + email);
+    	String message = "{\"cedula\":   \""    + cedula   + "\", \" nombre\":   \""    + nombre   + "\", \" apellido\": \""    + apellido + "\", \" fdn\":      \""    + fdn      + "\", \" password\": \""    + password + "\", \" email\":    \""    + email    + "\"}";
     	
     	
     	return message;
