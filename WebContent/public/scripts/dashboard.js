@@ -18,6 +18,9 @@ var datos = {
             console.log(data.fdn);
             console.log(data.password);
             console.log(data.email);
+            console.log(data.segundoNombre);
+            console.log(data.segundoApellido);
+            console.log(data.telf);
             document.getElementById("h1").value = `Bienvenido ${data.nombre}`;
             document.getElementById("cedula").value = data.cedula;
             document.getElementById("nombre").value = data.nombre;
@@ -26,6 +29,7 @@ var datos = {
             document.getElementById("password").value = data.password;
             document.getElementById("email").value = data.email;
             help++;
+            console.log(help)
             window.self();
         }
             
