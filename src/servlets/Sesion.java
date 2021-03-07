@@ -52,13 +52,13 @@ public class Sesion extends HttpServlet {
 		out.println(res);
 	}
 
-//	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("application/json");
-//		PrintWriter out = response.getWriter();
-//		
-//		String res = "";
-//		out.println(res);
-//	}
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		
+		String res = UserManager.delete(request);
+		out.println(res);
+	}
 
 	
 }
