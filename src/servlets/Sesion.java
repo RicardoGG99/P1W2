@@ -24,22 +24,18 @@ public class Sesion extends HttpServlet {
     }
     
     
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	super.doGet(request, response);
+    	
     	response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
-		UserManager um = new UserManager();
-		
-		String res = um.closeSession(request, response);
-		out.println(res);
-    }
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		
 		String res = UserManager.showCredentials(request);
 		out.println(res);
-	}
+    	
+    	
+    }
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");

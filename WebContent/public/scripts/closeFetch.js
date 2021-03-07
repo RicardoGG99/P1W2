@@ -1,3 +1,4 @@
+var form = document.getElementById("form");
 var closed = document.getElementById("close");
 
 closed.addEventListener('click', function(e){
