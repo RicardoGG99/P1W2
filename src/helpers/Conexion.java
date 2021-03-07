@@ -142,8 +142,8 @@ public class Conexion {
 		
 		//Update
 		
-		public static boolean psUpdate(String[] obj, String cedula, Connection connection) {
-			boolean result = false;
+		public static int psUpdate(String[] obj, String cedula, Connection connection) {
+			int result = 0;
 			String sentence = pr.getSQL("update");
 			
 			try {
@@ -160,20 +160,24 @@ public class Conexion {
 				pst.setString(9, obj[8]);
 				pst.setString(10, cedula);
 				System.out.println(pst);
-				pst.execute();
-				
+				result = pst.executeUpdate();
 				pst.close();
-				result = true;
+				
 			} catch (SQLException e) {
-				result = false;
+				result = 0;
 				e.printStackTrace();
 			}
-			
-			
-			
-			
-			
 			return result;
+		}
+		
+		public static void main(String[] args) {
+			Conexion c = new Conexion();
+			Connection conn = c.getConnection();
+			String[] obj = {"7934331", "Ricardo", "Graziano", "19-06-1999", "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f", "ricardo@graziano", "Jose", "Gutierrez", "0412-9992233"};
+			String cedula = "27637837";
+			
+			System.out.println(c.psUpdate(obj, cedula, conn));
+			
 		}
 		
 		

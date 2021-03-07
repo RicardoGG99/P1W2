@@ -166,7 +166,7 @@ public class UserManager {
     	Cookie cookies[] = request.getCookies();
     	String cedula = "";
     	String message = "";
-    	boolean result = false;
+    	int result = 0;
     	
     	for(Cookie c: cookies) {
     		if(c.getName().equals("cedula")) {
@@ -176,7 +176,7 @@ public class UserManager {
     	
     	try {
 			result = Conexion.psUpdate(obj, cedula, connection);
-			if(result == false) {
+			if(result == 1) {
 				message = "{\"message\": \"Update Exitoso\", "
 					 	 + "\"status\": 200 }";
 
