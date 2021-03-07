@@ -70,7 +70,7 @@ public class UserManager {
 		    		Cookie cookie3 = new Cookie("fdn", obj2[3]);
 		    		response.addCookie(cookie3);
 		    		
-		    		Cookie cookie4 = new Cookie("password", obj2[4]);
+		    		Cookie cookie4 = new Cookie("password", password);
 		    		response.addCookie(cookie4);
 		    		
 		    		Cookie cookie5 = new Cookie("email", obj2[5]);
