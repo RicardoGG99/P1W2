@@ -1,5 +1,4 @@
 var form = document.getElementById("form");
-var update = document.getElementById("update");
 var fd = new FormData(form);
 var help = 0;
 
@@ -39,7 +38,7 @@ var datos = {
     })
     .catch(error => console.error());
 
-    update.addEventListener('click', function(e1){
+    form.addEventListener('submit', function(e1){
         e1.preventDefault();
 
     var datosUpdate = {
