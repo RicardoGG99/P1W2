@@ -22,7 +22,16 @@ public class Sesion extends HttpServlet {
     public Sesion() {
         super();
     }
-
+    
+    
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		UserManager um = new UserManager();
+		
+		String res = um.closeSession(request, response);
+		out.println(res);
+    }
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");

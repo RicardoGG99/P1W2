@@ -235,6 +235,34 @@ public class UserManager {
     
     //close session and cookies
     
-    
+    public String closeSession(HttpServletRequest request, HttpServletResponse response) {
+    	String message = "";
+    	
+    	try {
+    		
+    		HttpSession session = request.getSession();
+    		session.invalidate();
+    		
+    		Cookie[] cookies = request.getCookies();
+    	    if (cookies != null)
+    	        for (Cookie cookie : cookies) {
+    	            cookie.setValue("");
+    	            cookie.setPath("/");
+    	            cookie.setMaxAge(0);
+    	            response.addCookie(cookie);
+    	        }
+    		
+    		
+    		
+    	message = "{\"message\": \"Sesión cerrada exitosamente\", "
+ 				 	 + "\"status\": 200 }";
+			
+		} catch (Exception e) {
+			message = "{\"message\": \"No se pudo cerrar la sesión\", "
+  				 	 + "\"status\": 503 }";
+		}
+    	
+    	return message;
+    }
   
     }
