@@ -38,28 +38,6 @@ var datos = {
     })
     .catch(error => console.error());
 
-    form.addEventListener('submit', function(e1){
-        e1.preventDefault();
-
-    var datosUpdate = {
-        method: "PUT",
-        body: fd 
-    };
-
-    fetch('https://p1-w2.herokuapp.com/Sesion', datosUpdate)
-    .then( res => res.json())
-    .then( data => {
-        if(data.status == 200){
-            window.open('https://p1-w2.herokuapp.com/public/views/updated.html', "_self");
-            alert(data.message);
-        }else{
-            window.open('https://p1-w2.herokuapp.com/public/views/notupdated.html', "_self");
-            alert(data.message);
-        }
-    })
-    .catch(error => console.error());
-    });
-
 
 
 
