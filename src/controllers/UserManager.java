@@ -195,7 +195,11 @@ public class UserManager {
     
     //delete
     
-    
+    public static String delete() {
+    	
+    	
+    	return null;
+    }
     
   
     }
