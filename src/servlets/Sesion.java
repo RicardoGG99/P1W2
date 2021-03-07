@@ -43,7 +43,7 @@ public class Sesion extends HttpServlet {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		String segundoNombre = request.getParameter("segundoNombre");
-		String segundoApellido = request.getParameter("segundoNombre");
+		String segundoApellido = request.getParameter("segundoApellido");
 		String telf = request.getParameter("telf");
 		
 		String[] obj = {cedula, nombre, apellido, fdn, password, email, segundoNombre, segundoApellido, telf};
