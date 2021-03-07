@@ -167,6 +167,7 @@ public class UserManager {
     	String cedula = "";
     	String message = "";
     	int result = 0;
+    	obj[4] = ph.hashPassword(obj[4]);
     	
     	for(Cookie c: cookies) {
     		if(c.getName().equals("cedula")) {
