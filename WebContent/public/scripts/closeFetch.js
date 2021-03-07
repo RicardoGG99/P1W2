@@ -1,5 +1,5 @@
 var form = document.getElementById("form");
-var closed = document.getElementById("close");
+var closed = document.getElementById("closed");
 
 closed.addEventListener('click', function(e){
     e.preventDefault();
@@ -9,8 +9,6 @@ closed.addEventListener('click', function(e){
         method: "GET",
         body: fd 
     };
-
-    
 
     fetch('https://p1-w2.herokuapp.com/Sesion', datos)
     .then( res => res.json())
