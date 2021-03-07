@@ -6,8 +6,9 @@ closed.addEventListener('click', function(e){
     var fd = new FormData(form);
 
     var datos = {
-        method: "GET",
-        body: fd 
+        method: "PUT",
+        body: fd,
+        mensaje: "cerrar" 
     };
 
     fetch('https://p1-w2.herokuapp.com/Sesion', datos)

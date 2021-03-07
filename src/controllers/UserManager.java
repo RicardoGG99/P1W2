@@ -201,9 +201,10 @@ public class UserManager {
     
     //delete
     
-    public static String delete(HttpServletRequest request) {
+    public static String delete(HttpServletRequest request, HttpServletResponse response) {
     	String message = "";
     	boolean result = false;
+    	UserManager um = new UserManager();
     	Cookie cookies[] = request.getCookies();
     	String cedula = "";
     	String password = "";
@@ -221,8 +222,17 @@ public class UserManager {
     		result = Conexion.psDelete(connection, cedula, password);
     		
     		if(result == true) {
-    			message = "{\"message\": \"Delete Exitoso\", "
-   				 	 + "\"status\": 200 }";
+    			
+    			boolean res = um.closeSession(request, response);
+    			
+    			if(res == true) {
+    				message = "{\"message\": \"Delete Exitoso\", "
+    	   				 	 + "\"status\": 200 }";
+    			}else {
+    				message = "{\"message\": \"Delete Fallido\", "
+    					 	 + "\"status\": 503 }";
+    			}
+    			
         	}
     		
 		} catch (Exception e) {
@@ -235,8 +245,8 @@ public class UserManager {
     
     //close session and cookies
     
-    public String closeSession(HttpServletRequest request, HttpServletResponse response) {
-    	String message = "";
+    public boolean closeSession(HttpServletRequest request, HttpServletResponse response) {
+    	boolean result = false;
     	
     	try {
     		
@@ -252,17 +262,13 @@ public class UserManager {
     	            response.addCookie(cookie);
     	        }
     		
-    		
-    		
-    	message = "{\"message\": \"Sesión cerrada exitosamente\", "
- 				 	 + "\"status\": 200 }";
+    	result = true;
 			
 		} catch (Exception e) {
-			message = "{\"message\": \"No se pudo cerrar la sesión\", "
-  				 	 + "\"status\": 503 }";
+			result = false;
 		}
     	
-    	return message;
+    	return result;
     }
   
     }

@@ -20,7 +20,7 @@ var datos = {
             console.log(data.segundoNombre);
             console.log(data.segundoApellido);
             console.log(data.telf);
-            document.getElementById("h1").innerHTML = `Bienvenido ${data.nombre}`;
+            document.getElementById("h1").innerHTML = `Bienvenido/a ${data.nombre}`;
             document.getElementById("cedula").value = data.cedula;
             document.getElementById("nombre").value = data.nombre;
             document.getElementById("apellido").value = data.apellido;
