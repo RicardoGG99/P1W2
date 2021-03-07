@@ -23,19 +23,25 @@ public class Sesion extends HttpServlet {
         super();
     }
     
-    
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	super.doGet(request, response);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	super.doGet(req, resp);
     	
-    	response.setContentType("application/json");
+    	resp.setContentType("application/json");
+		PrintWriter out = resp.getWriter();
+		UserManager um = new UserManager();
+		String res = um.closeSession(req, resp);
+		out.println(res);
+    	
+    }
+    
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		
 		String res = UserManager.showCredentials(request);
 		out.println(res);
-    	
-    	
-    }
+	}
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
