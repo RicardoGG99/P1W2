@@ -107,13 +107,14 @@ public class UserManager {
     
     //Datos de la Sesion
     
-    public static String showCredentials(HttpServletRequest request, String password) {
+    public static String showCredentials(HttpServletRequest request) {
     	
     	Cookie cookies[] = request.getCookies();
     	String cedula = "";
     	String nombre = "";
     	String apellido = "";
     	String fdn = "";
+    	String password = "";
     	String email = "";
     	String segundoNombre = "";
     	String segundoApellido = "";
@@ -134,6 +135,10 @@ public class UserManager {
     		
     		if(c.getName().equals("fdn")) {
     			fdn = c.getValue();
+    		}
+    		
+    		if(c.getName().equals("password")) {
+    			password = c.getValue();
     		}
     		
     		if(c.getName().equals("email")) {
