@@ -15,6 +15,7 @@ form.addEventListener('submit', function(e){
     .then( res => res.json())
     .then( data => {
         if(data.status == 200){
+        	console.log(data.password);
             window.open('https://p1-w2.herokuapp.com/public/views/logged.html', "_self");
             alert(data.message);
         }else{
