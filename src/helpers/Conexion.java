@@ -170,15 +170,15 @@ public class Conexion {
 			return result;
 		}
 		
-		public static void main(String[] args) {
-			Conexion c = new Conexion();
-			Connection conn = c.getConnection();
-			String[] obj = {"7934331", "Ricardo", "Graziano", "19-06-1999", "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f", "ricardo@graziano", "Jose", "Gutierrez", "0412-9992233"};
-			String cedula = "27637837";
-			
-			System.out.println(c.psUpdate(obj, cedula, conn));
-			
-		}
+//		public static void main(String[] args) {
+//			Conexion c = new Conexion();
+//			Connection conn = c.getConnection();
+//			String[] obj = {"27637837", "Ricardo", "Graziano", "19-06-1999", "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f", "ricardo@graziano", "Jose", "Gutierrez", "0412-9992233"};
+//			String cedula = "27637837";
+//			
+//			System.out.println(c.psUpdate(obj, cedula, conn));
+//			
+//		}
 		
 		
 	
