@@ -182,7 +182,7 @@ public class UserManager {
 
 			}else {
 				message = "{\"message\": \"Update Fallido\", "
-					 	 + "\"status\": 502 }";
+					 	 + "\"status\": 503 }";
 			}
 			
 		} catch (Exception e) {
@@ -195,10 +195,36 @@ public class UserManager {
     
     //delete
     
-    public static String delete() {
+    public static String delete(HttpServletRequest request) {
+    	String message = "";
+    	boolean result = false;
+    	Cookie cookies[] = request.getCookies();
+    	String cedula = "";
+    	String password = "";
     	
+    	for(Cookie c: cookies) {
+    		if(c.getName().equals("cedula")) {
+    			cedula = c.getValue();
+    		}
+    		
+    		if(c.getName().equals("password")) {
+    			password = c.getValue();
+    		}
+    	}
+    	try {
+    		result = Conexion.psDelete(connection, cedula, password);
+    		
+    		if(result == true) {
+    			message = "{\"message\": \"Delete Exitoso\", "
+   				 	 + "\"status\": 200 }";
+        	}
+    		
+		} catch (Exception e) {
+			message = "{\"message\": \"Delete Fallido\", "
+				 	 + "\"status\": 503 }";
+		}
     	
-    	return null;
+    	return message;
     }
     
   

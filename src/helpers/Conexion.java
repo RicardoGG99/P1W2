@@ -137,6 +137,27 @@ public class Conexion {
 		
 		//Delete
 		
+		public static boolean psDelete(Connection connection, String cedula, String password) {
+			String sentence = pr.getSQL("delete");
+			boolean result = false;
+			
+			try {
+				PreparedStatement pst = null;
+				pst = connection.prepareStatement(sentence);
+				pst.setString(1, cedula);
+				pst.setString(2, password);
+				result = true;
+				pst.execute();
+				pst.close();
+				
+			} catch (Exception e) {
+				System.out.println(e);
+				result = false;
+			}
+			
+			
+			return result;
+		}
 		
 		
 		
@@ -170,16 +191,8 @@ public class Conexion {
 			return result;
 		}
 		
-//		public static void main(String[] args) {
-//			Conexion c = new Conexion();
-//			Connection conn = c.getConnection();
-//			String[] obj = {"27637837", "Ricardo", "Graziano", "19-06-1999", "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f", "ricardo@graziano", "Jose", "Gutierrez", "0412-9992233"};
-//			String cedula = "27637837";
-//			
-//			System.out.println(c.psUpdate(obj, cedula, conn));
-//			
-//		}
-		
+
+	
 		
 	
 }
