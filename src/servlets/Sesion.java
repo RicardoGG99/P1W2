@@ -56,9 +56,21 @@ public class Sesion extends HttpServlet {
 	//Delete
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
+		UserManager um = new UserManager();
 		PrintWriter out = response.getWriter();
 		
-		String res = UserManager.delete(request, response);
+		String res = um.delete(request);
+		
+		if(res == "{\"message\": \"Delete Exitoso\", "
+   				 	 + "\"status\": 200 }") {
+			boolean r = um.closeSession(request, response);
+			
+			if(r == false) {
+				res = "{\"message\": \"Delete Fallido\", "
+	   				 	 + "\"status\": 200 }";
+			}
+		}
+		
 		out.println(res);
 	}
 

@@ -201,7 +201,7 @@ public class UserManager {
     
     //delete
     
-    public static String delete(HttpServletRequest request,HttpServletResponse response) {
+    public static String delete(HttpServletRequest request) {
     	String message = "";
     	boolean result = false;
     	Cookie cookies[] = request.getCookies();
@@ -222,7 +222,6 @@ public class UserManager {
     		result = Conexion.psDelete(connection, cedula, password);
     		
     		if(result == true) {
-    			um.closeSession(request, response);
     			message = "{\"message\": \"Delete Exitoso\", "
    				 	 + "\"status\": 200 }";
         	}
