@@ -60,17 +60,6 @@ public class Sesion extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		String res = um.delete(request);
-		
-		if(res == "{\"message\": \"Delete Exitoso\", "
-   				 	 + "\"status\": 200 }") {
-			boolean r = um.closeSession(request, response);
-			
-			if(r == false) {
-				res = "{\"message\": \"Delete Fallido\", "
-	   				 	 + "\"status\": 200 }";
-			}
-		}
-		
 		out.println(res);
 	}
 
