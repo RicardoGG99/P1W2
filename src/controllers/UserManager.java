@@ -217,9 +217,12 @@ public class UserManager {
     		if(c.getName().equals("password")) {
     			password = c.getValue();
     		}
+    		
+    		
     	}
     	try {
-    		result = Conexion.psDelete(connection, cedula, password);
+    		String newPassword = ph.hashPassword(password);
+    		result = Conexion.psDelete(connection, cedula, newPassword);
     		
     		if(result == true) {
     			message = "{\"message\": \"Delete Exitoso\", "

@@ -60,6 +60,7 @@ public class Sesion extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		String res = um.delete(request);
+		
 		out.println(res);
 	}
 
