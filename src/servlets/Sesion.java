@@ -23,7 +23,7 @@ public class Sesion extends HttpServlet {
         super();
     }
     
-    
+    //Mostrar Credenciales al usuario
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
@@ -32,6 +32,7 @@ public class Sesion extends HttpServlet {
 		out.println(res);
 	}
 	
+	//Update
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
@@ -51,7 +52,8 @@ public class Sesion extends HttpServlet {
 		String res = UserManager.update(request, obj);
 		out.println(res);
 	}
-
+	
+	//Delete
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();

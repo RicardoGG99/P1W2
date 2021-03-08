@@ -201,13 +201,13 @@ public class UserManager {
     
     //delete
     
-    public static String delete(HttpServletRequest request, HttpServletResponse response) {
+    public static String delete(HttpServletRequest request,HttpServletResponse response) {
     	String message = "";
     	boolean result = false;
-    	UserManager um = new UserManager();
     	Cookie cookies[] = request.getCookies();
     	String cedula = "";
     	String password = "";
+    	UserManager um = new UserManager();
     	
     	for(Cookie c: cookies) {
     		if(c.getName().equals("cedula")) {
@@ -222,17 +222,9 @@ public class UserManager {
     		result = Conexion.psDelete(connection, cedula, password);
     		
     		if(result == true) {
-    			
-    			boolean res = um.closeSession(request, response);
-    			
-    			if(res == true) {
-    				message = "{\"message\": \"Delete Exitoso\", "
-    	   				 	 + "\"status\": 200 }";
-    			}else {
-    				message = "{\"message\": \"Delete Fallido\", "
-    					 	 + "\"status\": 503 }";
-    			}
-    			
+    			um.closeSession(request, response);
+    			message = "{\"message\": \"Delete Exitoso\", "
+   				 	 + "\"status\": 200 }";
         	}
     		
 		} catch (Exception e) {
