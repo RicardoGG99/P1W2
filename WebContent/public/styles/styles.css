@@ -23,6 +23,16 @@
     cursor: pointer;
     }
     
+    #delete{
+    margin-top: 20px;
+    background: tomato;
+    color:  white;
+    padding: 6px;
+    border: 0;
+    font-size: 1.2em;
+    cursor: pointer;
+    }
+
     body{
        background: silver;
        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Courier, monospace, 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Helvetica, sans-serif;
@@ -30,9 +40,17 @@
     }
 
     h1{
-    text-align: center;
+        text-align: center;
     }
 
     h3{
         text-align: center;
         }
+
+    img{
+        margin-left: 102px;
+        padding-top: 25px;
+        height: 250px;
+        width: 250px;
+        border-radius: 50%;
+    }
