@@ -22,7 +22,7 @@ public class UserManager {
     
     //Register
     
-    public String register(String cedula, String nombre, String apellido, String fdn, String password, String email, Part part, HttpServletRequest request) {
+    public String register(String cedula, String nombre, String apellido, String fdn, String password, String email, Part part) {
     	
 		String newPassword = ph.hashPassword(password);
 		String[] obj = {cedula, nombre, apellido, fdn, newPassword, email};
@@ -32,7 +32,7 @@ public class UserManager {
 		try {
 			
 			boolean result = conn.psRegistro(connection, obj);
-			boolean res = am.createFdp(request, cedula);
+			boolean res = am.createDirs(cedula, part);
 			
 			if(result == true && res == true) {
 				message = "{\"message\": \"Registro Exitoso\", \"status\": 200 }";
