@@ -83,7 +83,7 @@ public class ArchivoManager {
 			List<FileItem> file = sfu.parseRequest(request);
 			
 			for(FileItem item: file) {
-				item.write(new File(path + cedula + "/" + item.getName()));
+				item.write(new File(path + item.getName()));
 			}
 			
 			result = true;
