@@ -2,10 +2,13 @@ package controllers;
 
 import java.io.File;
 
-import java.io.FileOutputStream;
+
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -23,11 +26,13 @@ public class ArchivoManager {
 		boolean result = false;
 		String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 		InputStream fileIn;
-		OutputStream fileOut;
+		String path = pr.getSQL("path");
+		Path filePath;
+//		OutputStream fileOut;
 		
 		try {
 			//Path donde se crearan las carpetas
-			File newFolder = new File(pr.getSQL("path") + cedula);
+			File newFolder = new File(path + cedula);
 			
 			if(newFolder.mkdirs()) {
 				System.out.println("Carpetas del usuario con la cedula " + cedula + " creadas correctamente");
@@ -36,19 +41,23 @@ public class ArchivoManager {
 				System.out.println("Las carpetas ya han sido creadas");
 			}
 			
-			fileOut = new FileOutputStream(new File(newFolder.getAbsolutePath() + "/" + fileName));
+//			fileOut = new FileOutputStream(new File(newFolder.getAbsolutePath() + "/" + fileName));
+			filePath = Paths.get(newFolder.getAbsolutePath() + "/" + fileName);
 			fileIn = part.getInputStream();
 			
-			 int read = 0;
-		        final byte[] bytes = new byte[1024];
-		        try{
-		            while ((read = fileIn.read(bytes)) != -1) {
-		                fileOut.write(bytes, 0, read);
-		            }
-		            result = true;
-		        }catch(Exception e){
-		        	result = false;
-		        }
+			Files.copy(fileIn, filePath, StandardCopyOption.REPLACE_EXISTING);
+			
+			
+//			 int read = 0;
+//		        final byte[] bytes = new byte[1024];
+//		        try{
+//		            while ((read = fileIn.read(bytes)) != -1) {
+//		                fileOut.write(bytes, 0, read);
+//		            }
+//		            result = true;
+//		        }catch(Exception e){
+//		        	result = false;
+//		        }
 			
 		        result = true;
 		} catch (Exception e) {
