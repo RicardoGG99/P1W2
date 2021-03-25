@@ -1,10 +1,11 @@
 package controllers;
 
 import java.io.File;
+
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-
+import java.nio.file.Paths;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -17,94 +18,89 @@ public class ArchivoManager {
 	private static PropertiesReader pr = new PropertiesReader();
 	
 	
-	//Crear Foto de perfil
-    
-    public boolean createFdp(String cedula, Part part) {
-    	boolean result = false;
-    	
-    	try {
-			
-    		InputStream fileIn;
-    		OutputStream fileOut;
-    		
-    		//Path donde se crearan las carpetas
+	//Crear directorios
+	public boolean createDirs(String cedula, Part part) {
+		boolean result = false;
+		String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+		InputStream fileIn;
+		OutputStream fileOut;
+		
+		try {
+			//Path donde se crearan las carpetas
 			File newFolder = new File(pr.getSQL("path") + cedula);
 			
-    		if(newFolder.mkdirs()) {
-    			System.out.println("Carpetas del usuario con la cedula " + cedula + " creadas correctamente");
-    		}else {
-    			System.out.println("Las carpetas ya han sido creadas");
-    		}
-    		
-    		//Se crea el archivo vacio dentro de la carpeta del usuario
-    		fileOut = new FileOutputStream(new File(newFolder.getAbsolutePath() + "/" + part.getName()));
-    		System.out.println("Archivo Creado");
-    		
-    		fileIn = part.getInputStream();
-    		
-    		 	//Se llena el archivo vacio
-    			int a = 0;
-    	        final byte[] bytes = new byte[1024];
-    	        try{
-    	            while ((a = fileIn.read(bytes)) != -1) {
-    	                fileOut.write(bytes, 0, a);
-    	            }
-    	            System.out.println("Archivo actualizado");
-    	            fileOut.close();
-    	            fileIn.close();
-    	            
-    	            result = true;
-    	        }catch(Exception e){
-    	            System.out.println(e);
-    	            result = false;
-    	        }
-    		  		
+			if(newFolder.mkdirs()) {
+				System.out.println("Carpetas del usuario con la cedula " + cedula + " creadas correctamente");
+				result = true;
+			}else {
+				System.out.println("Las carpetas ya han sido creadas");
+			}
+			
+			fileOut = new FileOutputStream(new File(newFolder.getAbsolutePath() + "/" + fileName));
+			fileIn = part.getInputStream();
+			
+			 int read = 0;
+		        final byte[] bytes = new byte[1024];
+		        try{
+		            while ((read = fileIn.read(bytes)) != -1) {
+		                fileOut.write(bytes, 0, read);
+		            }
+		            result = true;
+		        }catch(Exception e){
+		        	result = false;
+		        }
+			
+		        result = true;
 		} catch (Exception e) {
 			result = false;
-			System.out.println("Error en la creacion del archivo");
+			e.printStackTrace();
 		}
-    	
-    	return result;
-    	
-    	
-    }
+		
+		return result;
+	}
+
     
     //Eliminar Foto de Perfil
     
-    public String deleteFdp(String cedula, HttpServletRequest request, HttpServletResponse response) {
+    public String deleteFdp(Part part, String cedula, HttpServletRequest request, HttpServletResponse response) {
     	
     	String message = "";
+    	String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
     	
     	File folder = new File(pr.getSQL("path") + cedula);
-		File file = new File(folder.getAbsolutePath() + "/fdp.png");
+		File file = new File(folder.getAbsolutePath() + "/" + fileName);
 		
     	
     	if(file.delete()) {
-    		message = "{\"message\": \"Delete Exitoso\", "
+    		message = "{\"message\": \"Foto de perfil eliminada exitosamente\", "
   				 	 + "\"status\": 200 }";
     	}else {
-    		message = "{\"message\": \"Delete Fallido\", "
+    		message = "{\"message\": \"No se pudo eliminar la foto de perfil\", "
 				 	 + "\"status\": 503 }";
     	}
     	
     	if(folder.delete()) {
-    		message = "{\"message\": \"Delete Exitoso\", "
+    		message = "{\"message\": \"Foto de perfil eliminada exitosamente\", "
   				 	 + "\"status\": 200 }";
     		
     		boolean r = um.closeSession(request, response);
 			
 			if(r == false) {
-				message = "{\"message\": \"Delete Fallido\", "
-	   				 	 + "\"status\": 200 }";
+				message = "{\"message\": \"No se pudo eliminar la foto de perfil\", "
+	   				 	 + "\"status\": 503 }";
 			}
 			
     	}else {
-    		message = "{\"message\": \"Delete Fallido\", "
+    		message = "{\"message\": \"No se pudo eliminar la foto de perfil\", "
 				 	 + "\"status\": 503 }";
     	}
     	
     	
     	return message;
     }
+    
+
+    
+    
     
 }

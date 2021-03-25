@@ -39,8 +39,3 @@ var datos = {
             
     })
     .catch(error => console.error());
-
-
-
-
-

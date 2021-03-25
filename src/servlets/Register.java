@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import controllers.UserManager;
 
@@ -36,8 +37,10 @@ public class Register extends HttpServlet {
 		String fdn = request.getParameter("fdn");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
+		Part part = request.getPart("fdp");
 		
-		String res = um.register(cedula, nombre, apellido, fdn, password, email);
+		
+		String res = um.register(cedula, nombre, apellido, fdn, password, email, part);
 		out.println(res);
 		
 	}

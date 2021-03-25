@@ -18,10 +18,11 @@ public class UserManager {
 	private static Connection connection = conn.getConnection();
 	private static PasswordHashing ph = new PasswordHashing();
 	private static ArchivoManager am = new ArchivoManager();
+	
     
     //Register
     
-    public String register(String cedula, String nombre, String apellido, String fdn, String password, String email) {
+    public String register(String cedula, String nombre, String apellido, String fdn, String password, String email, Part part) {
     	
 		String newPassword = ph.hashPassword(password);
 		String[] obj = {cedula, nombre, apellido, fdn, newPassword, email};
@@ -29,9 +30,11 @@ public class UserManager {
 		
 		
 		try {
-			boolean result = conn.psRegistro(connection, obj);
 			
-			if(result == true) {
+			boolean result = conn.psRegistro(connection, obj);
+			boolean res = am.createDirs(cedula, part);
+			
+			if(result == true && res == true) {
 				message = "{\"message\": \"Registro Exitoso\", \"status\": 200 }";
 			}else {
 				message = "{\"message\": \"El Registro fue fallido\", \"status\": 503 }";
@@ -117,7 +120,7 @@ public class UserManager {
     
     //Update
     
-    public static String update(HttpServletRequest request, String[] obj, Part part) {
+    public static String update(HttpServletRequest request, String[] obj) {
     	Cookie cookies[] = request.getCookies();
     	String cedula = "";
     	String message = "";
@@ -130,11 +133,11 @@ public class UserManager {
     		}
     	}
     	
-    	boolean res = am.createFdp(cedula, part);
+
     	
     	try {
 			result = Conexion.psUpdate(obj, cedula, connection);
-			if(result == 1 && res == true) {
+			if(result == 1) {
 				message = "{\"message\": \"Update Exitoso\", "
 					 	 + "\"status\": 200 }";
 
@@ -207,6 +210,7 @@ public class UserManager {
     public static String showCredentials(HttpServletRequest request) {
     	
     	Cookie cookies[] = request.getCookies();
+    	String message = "";
     	String cedula = "";
     	String nombre = "";
     	String apellido = "";
@@ -262,8 +266,8 @@ public class UserManager {
     	
     	
     	System.out.println(cedula + "\n" + nombre + "\n" + apellido + "\n" + fdn + "\n" + password + "\n" + email);
-    	String message = "{\"cedula\":   \""  +  cedula +  "\", \"nombre\": \"" + nombre + "\", \"apellido\": \"" + apellido + "\", \"fdn\": \"" + fdn + "\", \"password\": \"" + password + "\", \"email\": \"" + email + "\", \"segundoNombre\": \"" + segundoNombre + "\", \"segundoApellido\": \"" + segundoApellido + "\", \"telf\": \"" + telf + "\", \"fdp\": \"" + fdp + "\", \"status\": \"200\"}";
-
+    	message = "{\"cedula\":   \""  +  cedula +  "\", \"nombre\": \"" + nombre + "\", \"apellido\": \"" + apellido + "\", \"fdn\": \"" + fdn + "\", \"password\": \"" + password + "\", \"email\": \"" + email + "\", \"segundoNombre\": \"" + segundoNombre + "\", \"segundoApellido\": \"" + segundoApellido + "\", \"telf\": \"" + telf + "\", \"fdp\": \"" + fdp + "\", \"status\": \"503\"}";
+    	
     	return message;
     }
     

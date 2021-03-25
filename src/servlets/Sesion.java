@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -9,8 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
 import controllers.UserManager;
 
 
@@ -48,11 +47,11 @@ public class Sesion extends HttpServlet {
 		String segundoNombre = request.getParameter("segundoNombre");
 		String segundoApellido = request.getParameter("segundoApellido");
 		String telf = request.getParameter("telf");
-		Part part = request.getPart("fdp");
+		
 		
 		String[] obj = {cedula, nombre, apellido, fdn, password, email, segundoNombre, segundoApellido, telf};
 		
-		String res = UserManager.update(request, obj, part);
+		String res = UserManager.update(request, obj);
 		out.println(res);
 	}
 	
