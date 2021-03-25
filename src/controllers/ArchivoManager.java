@@ -3,15 +3,21 @@ package controllers;
 import java.io.File;
 
 
+
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import helpers.PropertiesReader;
 
@@ -67,7 +73,30 @@ public class ArchivoManager {
 		
 		return result;
 	}
-
+	
+	public boolean createFdp(HttpServletRequest request, String cedula){
+		boolean result = false;
+		
+		ServletFileUpload sfu = new ServletFileUpload(new DiskFileItemFactory());
+		try {
+			String path = pr.getSQL("path");
+			List<FileItem> file = sfu.parseRequest(request);
+			
+			for(FileItem item: file) {
+				item.write(new File(path + cedula + "/" + item.getName()));
+			}
+			
+			result = true;
+		
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		
+		
+		
+		return result;
+	}
     
     //Eliminar Foto de Perfil
     

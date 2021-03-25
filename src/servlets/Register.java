@@ -40,7 +40,7 @@ public class Register extends HttpServlet {
 		Part part = request.getPart("fdp");
 		
 		
-		String res = um.register(cedula, nombre, apellido, fdn, password, email, part);
+		String res = um.register(cedula, nombre, apellido, fdn, password, email, part, request);
 		out.println(res);
 		
 	}
